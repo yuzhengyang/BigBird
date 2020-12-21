@@ -1,0 +1,16 @@
+server:
+  port: 24001
+  address: 0.0.0.0
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: bigbird-app
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    servlet:
+      load-on-startup: 1
