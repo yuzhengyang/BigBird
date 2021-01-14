@@ -17,7 +17,10 @@ public class BigbirdAppApplication {
         log.info("============================================================");
         log.info("bigbird 服务启动成功");
         log.info("运行环境信息：");
-        log.info("操作系统：" + SystemTypeTool.getOSname().toString() + " 当前仅支持Linux系统：" + SystemTypeTool.isLinux());
+        log.info("操作系统：" + SystemTypeTool.getOSname().toString());
+        if (!SystemTypeTool.isLinux()) {
+            log.info("（仅支持Linux系统，部分功能将不可用）");
+        }
         log.info("============================================================");
         log.info("============================================================");
         log.info("/");
