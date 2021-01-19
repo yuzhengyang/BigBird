@@ -17,11 +17,12 @@ public final class R {
 
     public static class Paths {
         public static final String App = SystemPropertyTool.userDir();
+        public static final String Properties = DirTool.combine(App, "app_properties");
     }
 
     public static class Files {
         public static final String App = "x";
-        public static final String AppInfo = DirTool.combine(Paths.App, "app_info.properties");
-        public static final String MachineInfo = DirTool.combine(Paths.App, "machine_info.properties");
+        public static final String AppInfo = DirTool.combine(Paths.Properties, "app_info.properties");
+        public static final String MachineInfo = DirTool.combine(Paths.Properties, "machine_info.properties");
     }
 }
