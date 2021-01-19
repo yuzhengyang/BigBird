@@ -15,6 +15,9 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <lombok.version>1.18.12</lombok.version>
         <azylee-core.version>1.0.0-SNAPSHOT</azylee-core.version>
+        <sqlite.jdbc.version>3.31.1</sqlite.jdbc.version>
+        <fastjson.version>1.2.74</fastjson.version>
+        <mybatisplus.version>3.4.0</mybatisplus.version>
     </properties>
 
     <dependencies>
@@ -54,6 +57,24 @@
             <artifactId>azylee-core</artifactId>
             <version>${azylee-core.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.23.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.6</version>
         </dependency>
     </dependencies>
 
