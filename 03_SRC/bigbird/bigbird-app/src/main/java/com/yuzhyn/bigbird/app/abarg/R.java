@@ -17,12 +17,16 @@ public final class R {
 
     public static class Paths {
         public static final String App = SystemPropertyTool.userDir();
-        public static final String Properties = DirTool.combine(App, "app_properties");
+        public static final String AppData =  DirTool.combine(App, "bigbird_data");
+        public static final String Properties = DirTool.combine(AppData, "properties");
+        public static final String Database = DirTool.combine(AppData, "database");
+        public static final String TempDir = DirTool.combine(AppData, "tempdir");
     }
 
     public static class Files {
         public static final String App = "x";
         public static final String AppInfo = DirTool.combine(Paths.Properties, "app_info.properties");
         public static final String MachineInfo = DirTool.combine(Paths.Properties, "machine_info.properties");
+        public static final String MainDbFile = DirTool.combine(Paths.Database, "bigbird_main_db.sqlite3");
     }
 }

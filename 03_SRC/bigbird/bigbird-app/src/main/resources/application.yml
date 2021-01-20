@@ -10,9 +10,10 @@ spring:
   # 数据库相关配置
   datasource:
     # 方式一：  引用外部文件
-#    url: jdbc:sqlite:D:/tmp/sqlite/temp.sqlite3
+#    url: jdbc:sqlite:D:/tmp/sqlite/bigbird_main_db.sqlite3
     #方式二： 引用项目中的文件
-    url: jdbc:sqlite::resource:db/temp.sqlite3
+#    url: jdbc:sqlite::resource:db/bigbird_main_db.sqlite3
+    url: jdbc:sqlite:bigbird_data/database/bigbird_main_db.sqlite3
     username:
     password:
     driver-class-name: org.sqlite.JDBC

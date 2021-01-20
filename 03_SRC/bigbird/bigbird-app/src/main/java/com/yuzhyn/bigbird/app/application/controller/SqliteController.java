@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
+import pers.yuzhyn.azylee.core.logs.Alog;
 
+import java.io.File;
 import java.time.LocalDateTime;
 
 @RestController
@@ -48,6 +50,14 @@ public class SqliteController {
 
     @GetMapping("/select")
     public Object select() {
+        File f = new File(this.getClass().getResource("/").getPath());
+        Alog.e(f.getPath());
+        Alog.e(f.getAbsolutePath());
         return demoMapper.selectList(null);
     }
+
+    public static void main(String[] args) {
+        Alog.e(System.getProperty("java.io.tmpdir"));
+    }
+
 }

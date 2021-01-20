@@ -9,7 +9,7 @@ public class SqliteManager {
         ResultSet rs = null;
         Statement statement;
         Class.forName("org.sqlite.JDBC");//sqlite database name.
-        conn = DriverManager.getConnection("jdbc:sqlite::resource:db/temp.sqlite3");
+        conn = DriverManager.getConnection("jdbc:sqlite::resource:db/bigbird_main_db.sqlite3");
         statement = conn.createStatement();
         rs = statement.executeQuery("SELECT * FROM demo"); //this is name of database list
         while (rs.next()){
