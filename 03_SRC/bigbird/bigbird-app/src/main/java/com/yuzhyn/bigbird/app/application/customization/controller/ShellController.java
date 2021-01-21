@@ -1,7 +1,6 @@
-package com.yuzhyn.bigbird.app.application.controller;
+package com.yuzhyn.bigbird.app.application.customization.controller;
 
-import com.yuzhyn.bigbird.app.application.model.StreamGobbler;
-import com.yuzhyn.bigbird.app.utils.SystemStatusTool;
+import com.yuzhyn.bigbird.app.application.customization.model.StreamGobbler;
 import com.yuzhyn.bigbird.app.utils.SystemTypeTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,6 @@ import pers.yuzhyn.azylee.core.logs.Alog;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-import java.net.InetAddress;
 import java.util.Map;
 import java.util.concurrent.Executors;
 

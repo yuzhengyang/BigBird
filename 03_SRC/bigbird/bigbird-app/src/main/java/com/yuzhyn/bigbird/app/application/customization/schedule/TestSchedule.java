@@ -1,15 +1,10 @@
-package com.yuzhyn.bigbird.app.application.schedule;
+package com.yuzhyn.bigbird.app.application.customization.schedule;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.*;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Component;
 import pers.yuzhyn.azylee.core.threads.sleeps.Sleep;
 
 import java.util.Date;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Component
 @EnableScheduling

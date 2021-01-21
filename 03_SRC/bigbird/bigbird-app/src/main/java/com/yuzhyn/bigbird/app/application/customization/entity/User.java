@@ -1,4 +1,4 @@
-package com.yuzhyn.bigbird.app.application.entity;
+package com.yuzhyn.bigbird.app.application.customization.entity;
 
 import lombok.Data;
 

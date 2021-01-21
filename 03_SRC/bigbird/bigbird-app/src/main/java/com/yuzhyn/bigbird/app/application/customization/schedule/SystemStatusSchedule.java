@@ -1,8 +1,6 @@
-package com.yuzhyn.bigbird.app.application.schedule;
+package com.yuzhyn.bigbird.app.application.customization.schedule;
 
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import pers.yuzhyn.azylee.core.threads.sleeps.Sleep;
 
 import java.util.Date;

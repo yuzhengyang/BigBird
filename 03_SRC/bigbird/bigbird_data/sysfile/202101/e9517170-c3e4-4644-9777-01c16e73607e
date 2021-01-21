@@ -1,0 +1,303 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : 【127.0.0.1】localhost
+ Source Server Type    : MySQL
+ Source Server Version : 80019
+ Source Host           : localhost:3306
+ Source Schema         : sugar_nacos
+
+ Target Server Type    : MySQL
+ Target Server Version : 80019
+ File Encoding         : 65001
+
+ Date: 16/11/2020 17:27:45
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for config_info
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info`;
+CREATE TABLE `config_info`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  `c_desc` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `c_use` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `effect` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config_info
+-- ----------------------------
+INSERT INTO `config_info` VALUES (3, 'example.properties', 'DEFAULT_GROUP', 'useLocalCache=true', '25a822367cd73c79acc56da3c73fa07e', '2020-10-14 07:33:53', '2020-10-14 07:52:51', NULL, '127.0.0.1', '', '', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `config_info` VALUES (5, 'sugar-file-app-dev.yml', 'DEFAULT_GROUP', 'useLocalCache: true', '00b77727c9b4a661b8ae12cd7de1395f', '2020-10-14 08:20:44', '2020-10-14 08:54:41', NULL, '192.168.1.101', '', '', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (6, 'sugar-file-app.yml', 'DEFAULT_GROUP', 'useLocalCache: true\r\n\r\ntest:\r\n  name: ca\r\n  age: 13', 'fcbf7dc9d3583cf5d53ea315569d270b', '2020-10-14 08:40:33', '2020-10-14 09:21:39', NULL, '192.168.1.101', '', '', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (22, 'sugar-file-app-dev.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-14 10:24:54', '2020-10-14 11:03:41', NULL, '192.168.1.101', '', 'sugar-file', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (23, 'sugar-file-app-test.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '9035d59ee36ad77d6cd471ab60bf3fe9', '2020-10-14 10:25:18', '2020-10-14 10:25:33', NULL, '192.168.1.101', '', 'sugar-file', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (27, 'sugar-common-app-dev.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 02:00:13', '2020-10-21 02:00:13', NULL, '192.168.1.101', '', 'sugar-common', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (28, 'sugar-file-app-dev.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 02:08:52', '2020-10-21 02:46:41', NULL, '192.168.1.101', '', 'sugar', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (29, 'sugar-file-app-test.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '9035d59ee36ad77d6cd471ab60bf3fe9', '2020-10-21 02:08:52', '2020-10-21 02:08:52', NULL, '192.168.1.101', '', 'sugar', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (30, 'sugar-common-app-dev.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 02:09:05', '2020-10-21 02:09:05', NULL, '192.168.1.101', '', 'sugar', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (53, 'sugar-gateway-app-dev.yml', 'DEFAULT_GROUP', 'spring:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n          lowerCaseServiceId: true\r\n      default-filters:\r\n        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST\r\n      routes:\r\n      - id: sugar-common-app\r\n        uri: lb://sugar-common-app\r\n        predicates:\r\n          - Path=/common/**\r\n        filters:\r\n          - StripPrefix=1\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上12', 'ae0d4b37d737f4da557a685bb2acdc7d', '2020-11-09 08:35:52', '2020-11-09 08:35:52', NULL, '192.168.1.101', '', 'sugar', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (54, 'sugar-auth-app-dev.yml', 'DEFAULT_GROUP', 'spring:    \r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', 'f0033d0bb2cfb1a05de39a2ac0386a7b', '2020-11-09 09:53:21', '2020-11-11 06:51:01', NULL, '192.168.1.101', '', 'sugar', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (55, 'sugar-support-app-dev.yml', 'DEFAULT_GROUP', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-11-09 09:58:17', '2020-11-09 09:58:17', NULL, '192.168.1.101', '', 'sugar', NULL, NULL, NULL, 'yaml', NULL);
+
+-- ----------------------------
+-- Table structure for config_info_aggr
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info_aggr`;
+CREATE TABLE `config_info_aggr`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `datum_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'datum_id',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '内容',
+  `gmt_modified` datetime(0) NOT NULL COMMENT '修改时间',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for config_info_beta
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info_beta`;
+CREATE TABLE `config_info_beta`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
+  `beta_ips` varchar(1024) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'betaIps',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for config_info_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info_tag`;
+CREATE TABLE `config_info_tag`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_id',
+  `tag_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'tag_id',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for config_tags_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `config_tags_relation`;
+CREATE TABLE `config_tags_relation`  (
+  `id` bigint(0) NOT NULL COMMENT 'id',
+  `tag_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'tag_name',
+  `tag_type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'tag_type',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_id',
+  `nid` bigint(0) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`nid`) USING BTREE,
+  UNIQUE INDEX `uk_configtagrelation_configidtag`(`id`, `tag_name`, `tag_type`) USING BTREE,
+  INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_tag_relation' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for group_capacity
+-- ----------------------------
+DROP TABLE IF EXISTS `group_capacity`;
+CREATE TABLE `group_capacity`  (
+  `id` bigint unsigned NOT NULL COMMENT '主键ID',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Group ID，空字符表示整个集群',
+  `quota` int unsigned NOT NULL COMMENT '配额，0表示使用默认值',
+  `usage` int unsigned NOT NULL COMMENT '使用量',
+  `max_size` int unsigned NOT NULL COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
+  `max_aggr_count` int unsigned NOT NULL COMMENT '聚合子配置最大个数，，0表示使用默认值',
+  `max_aggr_size` int unsigned NOT NULL COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
+  `max_history_count` int unsigned NOT NULL COMMENT '最大变更历史数量',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_group_id`(`group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for his_config_info
+-- ----------------------------
+DROP TABLE IF EXISTS `his_config_info`;
+CREATE TABLE `his_config_info`  (
+  `id` bigint unsigned NOT NULL,
+  `nid` bigint unsigned NOT NULL,
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `op_type` char(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`nid`) USING BTREE,
+  INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
+  INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
+  INDEX `idx_did`(`data_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of his_config_info
+-- ----------------------------
+INSERT INTO `his_config_info` VALUES (0, 34, 'sugar-common-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 10:00:13', '2020-10-21 02:00:13', NULL, '192.168.1.101', 'I', 'sugar-common');
+INSERT INTO `his_config_info` VALUES (0, 35, 'sugar-file-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 10:08:52', '2020-10-21 02:08:52', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 36, 'sugar-file-app-test.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '9035d59ee36ad77d6cd471ab60bf3fe9', '2020-10-21 10:08:52', '2020-10-21 02:08:52', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 37, 'sugar-common-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 10:09:04', '2020-10-21 02:09:05', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (28, 38, 'sugar-file-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-10-21 10:43:48', '2020-10-21 02:43:46', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (28, 39, 'sugar-file-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '9035d59ee36ad77d6cd471ab60bf3fe9', '2020-10-21 10:46:40', '2020-10-21 02:46:41', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 40, 'gateway-refresh-dev.json', 'DEFAULT_GROUP', '', '{\r\n    \"refreshGatewayRoute\":false,\r\n    \"routeList\":[\r\n        {\r\n            \"id\":\"github_route\",\r\n            \"predicates\":[\r\n                {\r\n                    \"name\":\"Path\",\r\n                    \"args\":{\r\n                        \"_genkey_0\":\"/meteor1993\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filters\":[\r\n\r\n            ],\r\n            \"uri\":\"https://github.com\",\r\n            \"order\":0\r\n        }\r\n    ]\r\n}', 'f8ee6383db772510aedc9cdcbc4ad2ce', '2020-11-09 10:55:30', '2020-11-09 02:55:31', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 41, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'', '1881379326fe3835a39dc4848550ef40', '2020-11-09 11:11:20', '2020-11-09 03:11:20', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (34, 42, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'', '1881379326fe3835a39dc4848550ef40', '2020-11-09 11:19:01', '2020-11-09 03:19:01', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (34, 43, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上', '3f2cd2393dd419abf896aad411bd1942', '2020-11-09 11:20:54', '2020-11-09 03:20:54', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (34, 44, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上1', '5a38d6cdec419dbe78928cb83d446904', '2020-11-09 11:21:01', '2020-11-09 03:21:01', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (34, 45, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'2*\'\r\n# 以上1', '69bb4337b6408fc25a3767d0222e7b78', '2020-11-09 11:26:31', '2020-11-09 03:26:31', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 46, 'sugar_common_gateway_dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'22*\'\r\n# 以上1', 'f61fcc8c15a43459090682a2415bd6bc', '2020-11-09 11:34:28', '2020-11-09 03:34:29', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (39, 47, 'sugar_common_gateway_dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'22*\'\r\n# 以上1', 'f61fcc8c15a43459090682a2415bd6bc', '2020-11-09 12:22:28', '2020-11-09 04:22:29', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (39, 48, 'sugar_common_gateway_dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'232*\'\r\n# 以上1', '7441e20410adc0c76ea1290eb98e0fce', '2020-11-09 12:22:38', '2020-11-09 04:22:38', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (39, 49, 'sugar_common_gateway_dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上1', '5a38d6cdec419dbe78928cb83d446904', '2020-11-09 12:28:23', '2020-11-09 04:28:24', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (39, 50, 'sugar_common_gateway_dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'1*\'\r\n# 以上1', '511b6faf7f171c02c228a32bd719c896', '2020-11-09 12:28:32', '2020-11-09 04:28:32', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (33, 51, 'gateway-refresh-dev.json', 'DEFAULT_GROUP', '', '{\r\n    \"refreshGatewayRoute\":false,\r\n    \"routeList\":[\r\n        {\r\n            \"id\":\"github_route\",\r\n            \"predicates\":[\r\n                {\r\n                    \"name\":\"Path\",\r\n                    \"args\":{\r\n                        \"_genkey_0\":\"/meteor1993\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filters\":[\r\n\r\n            ],\r\n            \"uri\":\"https://github.com\",\r\n            \"order\":0\r\n        }\r\n    ]\r\n}', 'f8ee6383db772510aedc9cdcbc4ad2ce', '2020-11-09 12:29:34', '2020-11-09 04:29:34', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (33, 52, 'gateway-refresh-dev.json', 'DEFAULT_GROUP', '', '{\r\n    \"refreshGatewayRoute\":false,\r\n    \"routeList\":[\r\n        {\r\n            \"id\":\"github_route\",\r\n            \"predicates\":[\r\n                {\r\n                    \"name\":\"Path\",\r\n                    \"args\":{\r\n                        \"_genkey_0\":\"/meteor1993\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filters\":[\r\n\r\n            ],\r\n            \"uri\":\"https://github.com/\",\r\n            \"order\":0\r\n        }\r\n    ]\r\n}', '5f6b9fc301bd1e579c6aa0f06a550667', '2020-11-09 12:30:04', '2020-11-09 04:30:05', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (33, 53, 'gateway-refresh-dev.json', 'DEFAULT_GROUP', '', '{\r\n    \"refreshGatewayRoute\":true,\r\n    \"routeList\":[\r\n        {\r\n            \"id\":\"github_route\",\r\n            \"predicates\":[\r\n                {\r\n                    \"name\":\"Path\",\r\n                    \"args\":{\r\n                        \"_genkey_0\":\"/meteor1993\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filters\":[\r\n\r\n            ],\r\n            \"uri\":\"https://github.com/\",\r\n            \"order\":0\r\n        }\r\n    ]\r\n}', '9fe667bd08a4b497d1fc3e5882d74e05', '2020-11-09 14:19:16', '2020-11-09 06:19:17', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (33, 54, 'gateway-refresh-dev.json', 'DEFAULT_GROUP', '', '{\r\n    \"refreshGatewayRoute\": false,\r\n    \"routeList\":[\r\n        {\r\n            \"id\":\"github_route\",\r\n            \"predicates\":[\r\n                {\r\n                    \"name\":\"Path\",\r\n                    \"args\":{\r\n                        \"_genkey_0\":\"/meteor1993\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filters\":[\r\n\r\n            ],\r\n            \"uri\":\"https://github.com/\",\r\n            \"order\":0\r\n        }\r\n    ]\r\n}', '83c850350590d3b4c5e8ba726b4fc78a', '2020-11-09 14:19:32', '2020-11-09 06:19:32', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (34, 55, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'22*\'\r\n# 以上1', 'f61fcc8c15a43459090682a2415bd6bc', '2020-11-09 14:24:32', '2020-11-09 06:24:32', NULL, '192.168.1.101', 'D', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 56, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上1', '5a38d6cdec419dbe78928cb83d446904', '2020-11-09 14:24:43', '2020-11-09 06:24:43', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (39, 57, 'sugar_common_gateway_dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上1', '5a38d6cdec419dbe78928cb83d446904', '2020-11-09 14:24:47', '2020-11-09 06:24:47', NULL, '192.168.1.101', 'D', 'sugar');
+INSERT INTO `his_config_info` VALUES (48, 58, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上1', '5a38d6cdec419dbe78928cb83d446904', '2020-11-09 14:25:57', '2020-11-09 06:25:57', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (48, 59, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'management:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上12', '938e5801a61d1aa43042dcf88c19ca36', '2020-11-09 14:53:25', '2020-11-09 06:53:25', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (48, 60, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n          lowerCaseServiceId: true\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上12', 'd4661752a22e90072342abcebd984a34', '2020-11-09 14:55:42', '2020-11-09 06:55:42', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (48, 61, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n          lowerCaseServiceId: true\r\n      default-filters:\r\n        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上12', 'b0e1d3d51271eb2bdd55d3d2c1240498', '2020-11-09 15:39:20', '2020-11-09 07:39:21', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (33, 62, 'gateway-refresh-dev.json', 'DEFAULT_GROUP', '', '{\r\n    \"refreshGatewayRoute\": true,\r\n    \"routeList\":[\r\n        {\r\n            \"id\":\"github_route\",\r\n            \"predicates\":[\r\n                {\r\n                    \"name\":\"Path\",\r\n                    \"args\":{\r\n                        \"_genkey_0\":\"/meteor1993\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filters\":[\r\n\r\n            ],\r\n            \"uri\":\"https://github.com/\",\r\n            \"order\":0\r\n        }\r\n    ]\r\n}', 'f5f384d6b8b4f75b0621f54a2d24dfe9', '2020-11-09 15:56:42', '2020-11-09 07:56:43', NULL, '192.168.1.101', 'D', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 63, 'sugar-gateway-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n          lowerCaseServiceId: true\r\n      default-filters:\r\n        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST\r\n      routes:\r\n      - id: sugar-common-app\r\n        uri: lb://sugar-common-app\r\n        predicates:\r\n          - Path=/common/**\r\n        filters:\r\n          - StripPrefix=1\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上12', 'ae0d4b37d737f4da557a685bb2acdc7d', '2020-11-09 16:35:52', '2020-11-09 08:35:52', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (48, 64, 'sugar-common-gateway-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n          lowerCaseServiceId: true\r\n      default-filters:\r\n        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST\r\n      routes:\r\n      - id: sugar-common-app\r\n        uri: lb://sugar-common-app\r\n        predicates:\r\n          - Path=/common/**\r\n        filters:\r\n          - StripPrefix=1\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n      exposure:\r\n        include: \'*\'\r\n# 以上12', 'ae0d4b37d737f4da557a685bb2acdc7d', '2020-11-09 16:35:55', '2020-11-09 08:35:55', NULL, '192.168.1.101', 'D', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 65, 'sugar-auth-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-11-09 17:53:20', '2020-11-09 09:53:21', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (0, 66, 'sugar-support-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-11-09 17:58:16', '2020-11-09 09:58:17', NULL, '192.168.1.101', 'I', 'sugar');
+INSERT INTO `his_config_info` VALUES (54, 67, 'sugar-auth-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '3cb4675ed8d79d3f8fc9e09754ab8ee3', '2020-11-11 14:37:27', '2020-11-11 06:37:27', NULL, '192.168.1.101', 'U', 'sugar');
+INSERT INTO `his_config_info` VALUES (54, 68, 'sugar-auth-app-dev.yml', 'DEFAULT_GROUP', '', 'spring:\r\n  main:\r\n    allow-bean-definition-overriding: true\r\n    \r\n  devtools:\r\n    restart:\r\n      enabled: true\r\n\r\n  redis:\r\n    database: 3\r\n    host: 127.0.0.1\r\n    port: 6379\r\n    password: vVc++Qvodte69284TY@MNL*$9084o\r\n    jedis:\r\n      pool:\r\n        max-active: 8\r\n        max-wait: -1ms\r\n        max-idle: 8\r\n        min-idle: 0\r\n        timeout: 3000\r\n\r\n  datasource:\r\n    driver-class-name: com.mysql.jdbc.Driver\r\n    url: jdbc:mysql://127.0.0.1:3306/sugar_file?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\n    username: root\r\n    password: capricorn\r\n\r\nuseLocalCache: false', '5a4c5b497ceff829f15cbe918bd1731c', '2020-11-11 14:51:00', '2020-11-11 06:51:01', NULL, '192.168.1.101', 'U', 'sugar');
+
+-- ----------------------------
+-- Table structure for permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE `permissions`  (
+  `role` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `resource` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `action` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  UNIQUE INDEX `uk_role_permission`(`role`, `resource`, `action`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for roles
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles`  (
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `role` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  UNIQUE INDEX `idx_user_role`(`username`, `role`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of roles
+-- ----------------------------
+INSERT INTO `roles` VALUES ('nacos', 'ROLE_ADMIN');
+
+-- ----------------------------
+-- Table structure for tenant_capacity
+-- ----------------------------
+DROP TABLE IF EXISTS `tenant_capacity`;
+CREATE TABLE `tenant_capacity`  (
+  `id` bigint unsigned NOT NULL COMMENT '主键ID',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Tenant ID',
+  `quota` int unsigned NOT NULL COMMENT '配额，0表示使用默认值',
+  `usage` int unsigned NOT NULL COMMENT '使用量',
+  `max_size` int unsigned NOT NULL COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
+  `max_aggr_count` int unsigned NOT NULL COMMENT '聚合子配置最大个数',
+  `max_aggr_size` int unsigned NOT NULL COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
+  `max_history_count` int unsigned NOT NULL COMMENT '最大变更历史数量',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tenant_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tenant_info`;
+CREATE TABLE `tenant_info`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `kp` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'kp',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_id',
+  `tenant_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_name',
+  `tenant_desc` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'tenant_desc',
+  `create_source` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'create_source',
+  `gmt_create` bigint(0) NOT NULL COMMENT '创建时间',
+  `gmt_modified` bigint(0) NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_tenant_info_kptenantid`(`kp`, `tenant_id`) USING BTREE,
+  INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'tenant_info' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tenant_info
+-- ----------------------------
+INSERT INTO `tenant_info` VALUES (4, '1', 'sugar', 'sugar', 'sugar', 'nacos', 1603246111544, 1603246111544);
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`  (
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', 1);
+
+SET FOREIGN_KEY_CHECKS = 1;

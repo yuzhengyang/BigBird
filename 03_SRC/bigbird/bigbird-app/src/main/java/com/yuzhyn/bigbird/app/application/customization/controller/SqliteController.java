@@ -1,9 +1,9 @@
-package com.yuzhyn.bigbird.app.application.controller;
+package com.yuzhyn.bigbird.app.application.customization.controller;
 
-import com.yuzhyn.bigbird.app.application.entity.Demo;
-import com.yuzhyn.bigbird.app.application.entity.User;
-import com.yuzhyn.bigbird.app.application.mapper.DemoMapper;
-import com.yuzhyn.bigbird.app.application.mapper.UserMapper;
+import com.yuzhyn.bigbird.app.application.customization.entity.Demo;
+import com.yuzhyn.bigbird.app.application.customization.entity.User;
+import com.yuzhyn.bigbird.app.application.customization.mapper.DemoMapper;
+import com.yuzhyn.bigbird.app.application.customization.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

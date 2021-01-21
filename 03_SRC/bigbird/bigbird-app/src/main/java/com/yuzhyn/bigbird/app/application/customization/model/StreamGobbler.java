@@ -1,4 +1,4 @@
-package com.yuzhyn.bigbird.app.application.model;
+package com.yuzhyn.bigbird.app.application.customization.model;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

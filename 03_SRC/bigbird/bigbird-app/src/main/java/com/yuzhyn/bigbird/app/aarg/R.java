@@ -1,4 +1,4 @@
-package com.yuzhyn.bigbird.app.abarg;
+package com.yuzhyn.bigbird.app.aarg;
 
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.systems.property.SystemPropertyTool;
@@ -21,6 +21,7 @@ public final class R {
         public static final String Properties = DirTool.combine(AppData, "properties");
         public static final String Database = DirTool.combine(AppData, "database");
         public static final String TempDir = DirTool.combine(AppData, "tempdir");
+        public static final String SysFile = DirTool.combine(AppData, "sysfile");
     }
 
     public static class Files {

@@ -1,10 +1,8 @@
 package com.yuzhyn.bigbird.app;
 
-import com.yuzhyn.bigbird.app.abarg.MyPath;
-import com.yuzhyn.bigbird.app.abarg.R;
+import com.yuzhyn.bigbird.app.aarg.R;
 import com.yuzhyn.bigbird.app.utils.SystemTypeTool;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
@@ -15,14 +13,9 @@ import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
 import pers.yuzhyn.azylee.core.ios.txts.PropertyTool;
-import pers.yuzhyn.azylee.core.logs.Alog;
 import pers.yuzhyn.azylee.core.systems.property.SystemPropertyTool;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -59,6 +52,7 @@ public class BigbirdAppApplication {
         log.info("** 创建文件夹 **");
         DirTool.create(R.Paths.Database);
         DirTool.create(R.Paths.TempDir);
+        DirTool.create(R.Paths.SysFile);
         log.info("** 设置临时文件目录（不建议使用） **");
         System.setProperty("java.io.tmpdir", R.Paths.TempDir);
 

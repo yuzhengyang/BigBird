@@ -1,16 +1,12 @@
-package com.yuzhyn.bigbird.app.application.controller;
+package com.yuzhyn.bigbird.app.application.customization.controller;
 
 import com.yuzhyn.bigbird.app.utils.SystemStatusTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pers.yuzhyn.azylee.core.datas.ids.SnowflakeTool;
 
-import javax.security.auth.login.LoginContext;
-import java.io.*;
 import java.net.InetAddress;
-import java.util.StringTokenizer;
 
 @Slf4j
 @RestController

@@ -1,4 +1,4 @@
-package com.yuzhyn.bigbird.app.abarg;
+package com.yuzhyn.bigbird.app.aarg;
 
 public class MyPath {
 

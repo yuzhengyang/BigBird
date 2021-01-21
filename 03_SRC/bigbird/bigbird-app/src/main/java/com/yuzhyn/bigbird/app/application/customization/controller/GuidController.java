@@ -1,29 +1,28 @@
-package com.yuzhyn.bigbird.app.application.controller;
+package com.yuzhyn.bigbird.app.application.customization.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pers.yuzhyn.azylee.core.datas.ids.SnowflakeTool;
+
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/id")
-public class IdController {
+@RequestMapping("/guid")
+public class GuidController {
 
     @GetMapping("/get")
     public String get() {
-        SnowflakeTool idWorker = new SnowflakeTool(1, 1, 1);
-        return String.valueOf(idWorker.nextId());
+        return UUID.randomUUID().toString();
     }
 
 //    @GetMapping("/get/{count}")
 //    public ResponseData get(@PathVariable("count") int count) {
-//        ArrayList<Long> ids = new ArrayList();
-//        SnowflakeTool idWorker = new SnowflakeTool(1, 1, 1);
+//        ArrayList<String> ids = new ArrayList();
 //        if (count <= 0) {
 //            count = 1;
 //        }
 //        for (int i = 0; i < count; i++) {
-//            ids.add(idWorker.nextId());
+//            ids.add(UUID.randomUUID().toString());
 //        }
 //        return ResponseData.ok(ids);
 //    }
