@@ -11,6 +11,11 @@ import org.springframework.http.converter.HttpMessageConverter;
 
 import java.util.Arrays;
 
+/**
+ * FastJson格式配置
+ * 解决API返回值的JSON格式问题，如：
+ * 日期格式为 yyyy-MM-dd HH:mm:ss 格式，去掉中间的 T 字符
+ */
 @Configuration
 public class FastJsonConverterConfig {
 

@@ -12,6 +12,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * 配置日期参数格式化
+ * 解决请求参数中@RequestParam LocalDateTime 等日期类型从前端到后台转换错误问题
+ */
 @Configuration
 public class DateConfiguration {
 

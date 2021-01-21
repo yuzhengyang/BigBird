@@ -1,11 +1,11 @@
 package com.yuzhyn.bigbird.app.application.customization.controller;
 
 import com.yuzhyn.bigbird.app.application.customization.model.StreamGobbler;
-import com.yuzhyn.bigbird.app.utils.SystemTypeTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pers.yuzhyn.azylee.core.datas.collections.MapTool;
 import pers.yuzhyn.azylee.core.logs.Alog;
+import pers.yuzhyn.azylee.core.systems.property.SystemTypeTool;
 
 import java.io.File;
 import java.io.InputStreamReader;

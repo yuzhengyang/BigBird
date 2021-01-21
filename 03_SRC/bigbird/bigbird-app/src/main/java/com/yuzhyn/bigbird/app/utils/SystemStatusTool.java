@@ -1,5 +1,7 @@
 package com.yuzhyn.bigbird.app.utils;
 
+import pers.yuzhyn.azylee.core.systems.property.SystemTypeTool;
+
 public class SystemStatusTool {
 
     public static float getCpuUseRatio() {

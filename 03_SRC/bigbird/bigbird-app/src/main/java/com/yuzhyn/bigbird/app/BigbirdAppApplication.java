@@ -1,7 +1,6 @@
 package com.yuzhyn.bigbird.app;
 
 import com.yuzhyn.bigbird.app.aarg.R;
-import com.yuzhyn.bigbird.app.utils.SystemTypeTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +13,7 @@ import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
 import pers.yuzhyn.azylee.core.ios.txts.PropertyTool;
 import pers.yuzhyn.azylee.core.systems.property.SystemPropertyTool;
+import pers.yuzhyn.azylee.core.systems.property.SystemTypeTool;
 
 import java.io.InputStream;
 import java.util.Map;
