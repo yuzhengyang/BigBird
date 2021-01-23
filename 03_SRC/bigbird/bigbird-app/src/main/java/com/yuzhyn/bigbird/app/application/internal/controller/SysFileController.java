@@ -7,6 +7,7 @@ import com.yuzhyn.bigbird.app.aarg.R;
 import com.yuzhyn.bigbird.app.application.internal.entity.SysFile;
 import com.yuzhyn.bigbird.app.application.internal.entity.SysUser;
 import com.yuzhyn.bigbird.app.application.internal.mapper.SysFileMapper;
+import com.yuzhyn.bigbird.app.application.internal.service.SysFileService;
 import com.yuzhyn.bigbird.app.common.model.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
 import pers.yuzhyn.azylee.core.ios.streams.InputStreamTool;
+import reactor.util.function.Tuple3;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
@@ -43,6 +45,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("i/sysfile")
 public class SysFileController {
+
+    @Autowired
+    SysFileService sysFileService;
 
     @Autowired
     SysFileMapper sysFileMapper;
@@ -75,10 +80,9 @@ public class SysFileController {
             String yearMonthDir = DateTimeFormat.toStr(createTime, DateTimeFormatPattern.SHORT_YEAR_MONTH);
             String path = DirTool.combine(yearMonthDir, fileId);
             DirTool.create(DirTool.combine(R.Paths.SysFile, yearMonthDir));
-            File dest = new File(DirTool.combine(R.Paths.SysFile, path));
-            try {
-                file.transferTo(dest);
 
+            Tuple3<Boolean, String, String> saveToDiskResult = sysFileService.saveToDisk(file, DirTool.combine(R.Paths.SysFile, path));
+            if (saveToDiskResult.getT1()) {
                 // 上传文件成功，增加文件数据记录
                 SysFile sysFile = new SysFile();
                 sysFile.setId(fileId);
@@ -93,8 +97,6 @@ public class SysFileController {
                 if (flag > 0) {
                     return ResponseData.okData("sysFile", sysFile);
                 }
-            } catch (Exception ex) {
-                log.error("上传文件失败");
             }
             ResponseData.error("上传失败");
         }
@@ -115,10 +117,9 @@ public class SysFileController {
                     String yearMonthDir = DateTimeFormat.toStr(createTime, DateTimeFormatPattern.SHORT_YEAR_MONTH);
                     String path = DirTool.combine(yearMonthDir, fileId);
                     DirTool.create(DirTool.combine(R.Paths.SysFile, yearMonthDir));
-                    File dest = new File(DirTool.combine(R.Paths.SysFile, path));
-                    try {
-                        file.transferTo(dest);
 
+                    Tuple3<Boolean, String, String> saveToDiskResult = sysFileService.saveToDisk(file, DirTool.combine(R.Paths.SysFile, path));
+                    if (saveToDiskResult.getT1()) {
                         // 上传文件成功，增加文件数据记录
                         SysFile sysFile = new SysFile();
                         sysFile.setId(fileId);
@@ -133,8 +134,6 @@ public class SysFileController {
                         if (flag > 0) {
                             sysFileList.add(sysFile);
                         }
-                    } catch (Exception ex) {
-                        log.error("上传文件失败");
                     }
                 }
             }
