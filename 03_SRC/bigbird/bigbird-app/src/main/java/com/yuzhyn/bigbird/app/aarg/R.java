@@ -22,6 +22,7 @@ public final class R {
         public static final String Database = DirTool.combine(AppData, "database");
         public static final String TempDir = DirTool.combine(AppData, "tempdir");
         public static final String SysFile = DirTool.combine(AppData, "sysfile");
+        public static final String SysFileTemp = DirTool.combine(SysFile, "temp");
     }
 
     public static class Files {

@@ -9,9 +9,10 @@ public class SysFile {
     private String id;
     private String name;
     private String ext;
-    private long size;
+    private Long size;
     private String path;
     private LocalDateTime createTime;
     private String userId;
-    private LocalDateTime expiryTime;
+    private String md5;
+    private String sha1;
 }
