@@ -7,6 +7,9 @@ server:
 spring:
   application:
     name: bigbird-app
+  #启用覆盖同名bean
+#  main:
+#    allow-bean-definition-overriding: true
   # 数据库相关配置
   datasource:
     # 方式一：  引用外部文件
@@ -35,8 +38,8 @@ spring:
 #      filters: stat,slf4j,config
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 1024MB
+      max-request-size: 1024MB
   mvc:
     servlet:
       load-on-startup: 1

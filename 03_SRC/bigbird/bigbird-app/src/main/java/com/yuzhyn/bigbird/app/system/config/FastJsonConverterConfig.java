@@ -1,4 +1,4 @@
-package com.yuzhyn.bigbird.app.config;
+package com.yuzhyn.bigbird.app.system.config;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;

@@ -1,4 +1,4 @@
-//package com.yuzhyn.bigbird.app.config;
+//package com.yuzhyn.bigbird.app.system.config;
 //
 //import com.fasterxml.jackson.core.JsonGenerator;
 //import com.fasterxml.jackson.core.JsonParser;

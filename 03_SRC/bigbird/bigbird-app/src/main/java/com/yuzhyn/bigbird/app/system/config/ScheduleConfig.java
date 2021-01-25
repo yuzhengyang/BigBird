@@ -1,4 +1,4 @@
-package com.yuzhyn.bigbird.app.config;
+package com.yuzhyn.bigbird.app.system.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

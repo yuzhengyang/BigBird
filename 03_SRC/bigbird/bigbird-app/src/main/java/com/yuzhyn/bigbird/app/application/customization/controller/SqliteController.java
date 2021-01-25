@@ -41,7 +41,7 @@ public class SqliteController {
     @GetMapping("/insert")
     public String insert() {
         Demo demo = new Demo();
-        demo.setId(UUIDTool.getShort());
+        demo.setId(UUIDTool.get());
         demo.setName("孙悟空");
         demo.setAge(LocalDateTime.now().getSecond());
         int flag = demoMapper.insert(demo);
