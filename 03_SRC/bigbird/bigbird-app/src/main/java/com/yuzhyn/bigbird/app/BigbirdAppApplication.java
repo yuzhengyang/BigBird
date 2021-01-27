@@ -31,6 +31,7 @@ public class BigbirdAppApplication {
         log.info("/");
         log.info("============================================================");
         log.info("============================================================");
+        log.info("***BigBirdDeployer***::CODE::LaunchedSuccessfully--留念");
         log.info("bigbird 服务启动成功");
         log.info("");
         log.info("操作系统：" + SystemTypeTool.getOSname().toString());

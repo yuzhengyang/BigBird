@@ -21,7 +21,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     private PrintWriter writer;
 
 
-    public ResponseWrapper(HttpServletResponse response) throws IOException{
+    public ResponseWrapper(HttpServletResponse response) throws IOException {
         super(response);
         buffer = new ByteArrayOutputStream();
         out = new WapperedOutputStream(buffer);
@@ -58,6 +58,13 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
         flushBuffer();//将out、writer中的数据强制输出到WapperedResponse的buffer里面，否则取不到数据
         byte[] bytes = buffer.toByteArray();
         return new String(bytes, charset);
+
+    }
+
+    public byte[] getResponseData() throws IOException {
+        flushBuffer();//将out、writer中的数据强制输出到WapperedResponse的buffer里面，否则取不到数据
+        byte[] bytes = buffer.toByteArray();
+        return bytes;
 
     }
 
