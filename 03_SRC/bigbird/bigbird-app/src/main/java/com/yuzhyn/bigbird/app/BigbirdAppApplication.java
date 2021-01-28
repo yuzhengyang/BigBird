@@ -55,8 +55,8 @@ public class BigbirdAppApplication {
         DirTool.create(R.Paths.TempDir);
         DirTool.create(R.Paths.SysFile);
         DirTool.create(R.Paths.SysFileTemp);
-        log.info("** 设置临时文件目录（不建议使用） **");
-        System.setProperty("java.io.tmpdir", R.Paths.TempDir);
+//        log.info("** 设置临时文件目录（不建议使用） **");
+//        System.setProperty("java.io.tmpdir", R.Paths.TempDir);
 
         log.info("** 释放数据库文件到外部目录 **");
         try {

@@ -1,6 +1,8 @@
 package com.yuzhyn.bigbird.app.application.customization.controller;
 
 import com.yuzhyn.bigbird.app.application.customization.model.StreamGobbler;
+import com.yuzhyn.bigbird.app.common.model.ResponseData;
+import com.yuzhyn.bigbird.app.utils.LinuxFirewallTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import pers.yuzhyn.azylee.core.datas.collections.MapTool;
@@ -18,12 +20,26 @@ import java.util.concurrent.Executors;
 @RequestMapping("/sh")
 public class ShellController {
 
+    @PostMapping("/addFirewall")
+    public ResponseData addFirewall(@RequestParam int port) {
+        boolean addFlag = LinuxFirewallTool.addPort(port, "tcp");
+        boolean rldFlag = LinuxFirewallTool.reload();
+        return ResponseData.ok("addFlag: " + addFlag + " ,rldFlag: " + rldFlag);
+    }
+
+    @PostMapping("/removeFirewall")
+    public ResponseData removeFirewall(@RequestParam int port) {
+        boolean addFlag = LinuxFirewallTool.removePort(port, "tcp");
+        boolean rldFlag = LinuxFirewallTool.reload();
+        return ResponseData.ok("addFlag: " + addFlag + " ,rldFlag: " + rldFlag);
+    }
+
     @PostMapping("/exe")
-    public String exe(@RequestBody Map map) {
+    public ResponseData exe(@RequestBody Map map) {
         String cmd = MapTool.get(map, "cmd", "");
         if (!SystemTypeTool.isLinux()) {
             Alog.w("暂不支持非Linux的系统");
-            return "暂不支持非Linux的系统";
+            return ResponseData.error("暂不支持非Linux的系统");
         }
         try {
             String[] cmdA = {"/bin/sh", "-c", cmd};
@@ -37,15 +53,15 @@ public class ShellController {
                 sb.append(line).append("\n");
             }
             Alog.i(sb.toString());
-            return sb.toString();
+            return ResponseData.ok(sb.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "null";
+        return ResponseData.error();
     }
 
     @PostMapping("/at")
-    public String at() {
+    public ResponseData at() {
         try {
             String homeDirectory = System.getProperty("user.home");
             Process process = Runtime.getRuntime().exec(String.format("sh -c ls %s", homeDirectory));
@@ -67,6 +83,6 @@ public class ShellController {
             assert exitCode == 0;
         } catch (Exception ex) {
         }
-        return "运行完成";
+        return ResponseData.ok("运行完成");
     }
 }

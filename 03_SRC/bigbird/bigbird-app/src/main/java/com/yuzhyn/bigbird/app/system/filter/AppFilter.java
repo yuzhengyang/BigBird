@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.yuzhyn.bigbird.app.system.wrapper.ResponseWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pers.yuzhyn.azylee.core.datas.objects.Obj;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class AppFilter implements Filter {
         wrapper.setHeader("biz-op-time", runTime.toString());
 
         // 处理response数据（依据返回数据类型）
-        String contentType = servletResponse.getContentType();
+        String contentType = Obj.op(servletResponse.getContentType(), "");
         byte[] responseData = wrapper.getResponseData();
         switch (contentType) {
             case "application/json;charset=UTF-8":
