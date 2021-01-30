@@ -8,7 +8,7 @@ import java.util.Map;
 
 //@Component
 //@EnableScheduling
-public class SystemStatusSchedule {
+public class StatusTestSchedule {
 
     @Scheduled(cron = "0/1 * * * * *")
     public void show() {

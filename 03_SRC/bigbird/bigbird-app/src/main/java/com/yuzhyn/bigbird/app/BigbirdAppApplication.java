@@ -6,16 +6,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 import pers.yuzhyn.azylee.core.datas.collections.MapTool;
+import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormat;
+import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormatPattern;
 import pers.yuzhyn.azylee.core.datas.numbers.LongTool;
 import pers.yuzhyn.azylee.core.datas.strings.StringTool;
 import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
+import pers.yuzhyn.azylee.core.ios.files.FileVersionManager;
 import pers.yuzhyn.azylee.core.ios.txts.PropertyTool;
 import pers.yuzhyn.azylee.core.systems.property.SystemPropertyTool;
 import pers.yuzhyn.azylee.core.systems.property.SystemTypeTool;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Map;
 
 @Slf4j
@@ -63,6 +67,11 @@ public class BigbirdAppApplication {
             ClassPathResource classPathResource = new ClassPathResource("db/bigbird_main_db.sqlite3");
             InputStream inputStream = classPathResource.getInputStream();
             FileTool.inputStreamToFile(inputStream, R.Files.MainDbFile, false);
+
+            log.info("** 备份数据库文件 **");
+            FileVersionManager fileVersionManager = new FileVersionManager(R.Files.MainDbFile,100);
+            fileVersionManager.create();
+
             return true;
         } catch (Exception ex) {
             log.error("** 数据库文件释放失败，程序退出 **");

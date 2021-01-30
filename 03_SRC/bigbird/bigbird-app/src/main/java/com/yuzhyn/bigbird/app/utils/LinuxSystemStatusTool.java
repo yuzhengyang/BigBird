@@ -1,5 +1,6 @@
 package com.yuzhyn.bigbird.app.utils;
 
+import pers.yuzhyn.azylee.core.logs.Alog;
 import pers.yuzhyn.azylee.core.threads.sleeps.Sleep;
 
 import java.io.BufferedReader;
@@ -80,5 +81,10 @@ public class LinuxSystemStatusTool {
         } catch (Exception ex) {
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Alog.i(LinuxSystemStatusTool.getCpuUseRatio());
+        Alog.i(LinuxSystemStatusTool.getRam()[1]);
     }
 }
