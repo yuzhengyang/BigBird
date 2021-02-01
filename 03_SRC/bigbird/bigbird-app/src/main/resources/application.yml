@@ -45,9 +45,9 @@ spring:
       load-on-startup: 1
 
 # mybatis-plus 输出 SQL 语句
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
 
 # 打印sql
 #logging:
