@@ -35,7 +35,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("i/sysfile")
+@RequestMapping({"i/sysfile","i/f"})
 public class SysFileController {
 
     @Autowired
@@ -53,13 +53,13 @@ public class SysFileController {
     @Autowired
     SysFileMapper sysFileMapper;
 
-    @GetMapping("fileList")
+    @GetMapping({"fileList", "ls"})
     public ResponseData fileList() {
         List<SysFile> list = sysFileMapper.selectList(null);
         return ResponseData.okData(list);
     }
 
-    @PostMapping("fileListPage")
+    @PostMapping({"fileListPage", "lsp"})
     public ResponseData fileListPage(@RequestBody Map<String, Object> params) {
         int current = MapTool.getInt(params, "current", 1);
         int size = MapTool.getInt(params, "size", 1);
@@ -77,7 +77,7 @@ public class SysFileController {
      * @param files
      * @return
      */
-    @PostMapping("upload")
+    @PostMapping({"upload", "up"})
     public ResponseData upload(@RequestParam("userId") String userId, @RequestParam(value = "expiryTime", required = false) LocalDateTime expiryTime, @RequestParam(value = "bucketName", required = false) String bucketName, @RequestParam("file") MultipartFile[] files) {
         if (ListTool.ok(files)) {
             if (StringTool.ok(userId) && sysFileService.checkSpaceLimit(userId, files[0].getSize())) {
@@ -141,7 +141,7 @@ public class SysFileController {
      * @param fileName
      * @param response
      */
-    @GetMapping("download/{userPrefix}/{bucketName}/{fileName}")
+    @GetMapping({"download/{userPrefix}/{bucketName}/{fileName}", "dl/{userPrefix}/{bucketName}/{fileName}"})
     @ResponseBody
     public void download(@PathVariable String userPrefix, @PathVariable String bucketName, @PathVariable String fileName, HttpServletResponse response) {
         SysFile sysFile = sysFileService.getDownloadFile(userPrefix, bucketName, fileName);
@@ -154,7 +154,7 @@ public class SysFileController {
      * @param cursorId
      * @param response
      */
-    @GetMapping("download/{cursorId}")
+    @GetMapping({"download/{cursorId}", "dl/{cursorId}"})
     @ResponseBody
     public void download(@PathVariable String cursorId, HttpServletResponse response) {
         SysFile sysFile = sysFileService.getDownloadFile(cursorId);

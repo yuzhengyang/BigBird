@@ -3,6 +3,7 @@ package com.yuzhyn.bigbird.app.application.internal.entity;
 import lombok.Data;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormat;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormatPattern;
+import pers.yuzhyn.azylee.core.datas.objects.Obj;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -22,8 +23,15 @@ public class SystemStatus {
     private Integer appCpu;
     private Long appRam;
 
+    public SystemStatus() {
+        this.startTime = LocalDateTime.now();
+    }
+
     @Override
     public String toString() {
+        this.startTime = Obj.op(this.startTime, LocalDateTime.now());
+        this.stopTime = Obj.op(this.stopTime, LocalDateTime.now());
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(DateTimeFormat.toStr(startTime));
         stringBuilder.append("|");
@@ -31,15 +39,15 @@ public class SystemStatus {
         stringBuilder.append("|");
         stringBuilder.append(Duration.between(startTime, stopTime).getSeconds());
         stringBuilder.append("|");
-        stringBuilder.append(cpu);
+        stringBuilder.append(Obj.op(cpu, 0));
         stringBuilder.append("|");
-        stringBuilder.append(ram);
+        stringBuilder.append(Obj.op(ram, 0));
         stringBuilder.append("|");
-        stringBuilder.append(disk);
+        stringBuilder.append(Obj.op(disk, 0));
         stringBuilder.append("|");
-        stringBuilder.append(appCpu);
+        stringBuilder.append(Obj.op(appCpu, 0));
         stringBuilder.append("|");
-        stringBuilder.append(appRam);
+        stringBuilder.append(Obj.op(appRam, 0));
         return stringBuilder.toString();
     }
 }

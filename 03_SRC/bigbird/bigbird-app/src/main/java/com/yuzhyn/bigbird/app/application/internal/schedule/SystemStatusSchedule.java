@@ -21,13 +21,14 @@ public class SystemStatusSchedule {
 
 
     @Async
-    @Scheduled(cron = "0/1 * * * * *")
+    @Scheduled(cron = "0/10 * * * * *")
     public void show() {
-        Thread t = Thread.currentThread();
+//        Thread t = Thread.currentThread();
         SystemStatus systemStatus = new SystemStatus();
         systemStatus.setAfk(0L);
         systemStatus.setCpu((int) LinuxSystemStatusTool.getCpuUseRatio());
         systemStatus.setRam(LinuxSystemStatusTool.getRam()[1]);
+        Sleep.s(2);
         log.info(systemStatus.toString());
     }
 }
