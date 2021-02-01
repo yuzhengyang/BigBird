@@ -20,14 +20,14 @@ import java.util.Date;
 public class SystemStatusSchedule {
 
 
-    @Async
-    @Scheduled(cron = "0/1 * * * * *")
-    public void show() {
-        Thread t = Thread.currentThread();
-        SystemStatus systemStatus = new SystemStatus();
-        systemStatus.setAfk(0L);
-        systemStatus.setCpu((int) LinuxSystemStatusTool.getCpuUseRatio());
-        systemStatus.setRam(LinuxSystemStatusTool.getRam()[1]);
-        log.info(systemStatus.toString());
-    }
+//    @Async
+//    @Scheduled(cron = "0/1 * * * * *")
+//    public void show() {
+//        Thread t = Thread.currentThread();
+//        SystemStatus systemStatus = new SystemStatus();
+//        systemStatus.setAfk(0L);
+//        systemStatus.setCpu((int) LinuxSystemStatusTool.getCpuUseRatio());
+//        systemStatus.setRam(LinuxSystemStatusTool.getRam()[1]);
+//        log.info(systemStatus.toString());
+//    }
 }
