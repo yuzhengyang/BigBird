@@ -1,5 +1,6 @@
 package com.yuzhyn.bigbird.app.application.internal.controller;
 
+import ch.qos.logback.core.util.SystemInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yuzhyn.bigbird.app.aarg.R;
@@ -12,6 +13,7 @@ import com.yuzhyn.bigbird.app.application.internal.mapper.SysFileMapper;
 import com.yuzhyn.bigbird.app.application.internal.mapper.SysUserFileConfMapper;
 import com.yuzhyn.bigbird.app.application.internal.service.SysFileService;
 import com.yuzhyn.bigbird.app.common.model.ResponseData;
+import com.yuzhyn.bigbird.app.utils.ClientIPTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 import pers.yuzhyn.azylee.core.datas.collections.ListTool;
 import pers.yuzhyn.azylee.core.datas.collections.MapTool;
 import pers.yuzhyn.azylee.core.datas.datetimes.LocalDateTimeTool;
+import pers.yuzhyn.azylee.core.datas.ids.UUIDTool;
 import pers.yuzhyn.azylee.core.datas.strings.StringTool;
-import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
+import reactor.util.function.Tuple2;
 import reactor.util.function.Tuple3;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
@@ -35,7 +39,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping({"i/sysfile","i/f"})
+@RequestMapping({"i/sysfile", "i/f"})
 public class SysFileController {
 
     @Autowired
@@ -143,9 +147,9 @@ public class SysFileController {
      */
     @GetMapping({"download/{userPrefix}/{bucketName}/{fileName}", "dl/{userPrefix}/{bucketName}/{fileName}"})
     @ResponseBody
-    public void download(@PathVariable String userPrefix, @PathVariable String bucketName, @PathVariable String fileName, HttpServletResponse response) {
-        SysFile sysFile = sysFileService.getDownloadFile(userPrefix, bucketName, fileName);
-        this.download(sysFile, response);
+    public void download(@PathVariable String userPrefix, @PathVariable String bucketName, @PathVariable String fileName, HttpServletRequest request, HttpServletResponse response) {
+        Tuple2<SysFileCursor, SysFile> fileInfo = sysFileService.getDownloadFile(userPrefix, bucketName, fileName);
+        this.download(fileInfo, request, response);
     }
 
     /**
@@ -156,14 +160,18 @@ public class SysFileController {
      */
     @GetMapping({"download/{cursorId}", "dl/{cursorId}"})
     @ResponseBody
-    public void download(@PathVariable String cursorId, HttpServletResponse response) {
-        SysFile sysFile = sysFileService.getDownloadFile(cursorId);
-        this.download(sysFile, response);
+    public void download(@PathVariable String cursorId, HttpServletRequest request, HttpServletResponse response) {
+        Tuple2<SysFileCursor, SysFile> fileInfo = sysFileService.getDownloadFile(cursorId);
+        this.download(fileInfo, request, response);
     }
 
-    public void download(SysFile sysFile, HttpServletResponse response) {
-        if (sysFile != null) {
+    public void download(Tuple2<SysFileCursor, SysFile> fileInfo, HttpServletRequest request, HttpServletResponse response) {
+        SysFileCursor sysFileCursor = fileInfo.getT1();
+        SysFile sysFile = fileInfo.getT2();
+        if (sysFileCursor != null && sysFile != null) {
             try {
+                sysFileService.saveDownloadLog(sysFileCursor, sysFile, ClientIPTool.getIp(request));
+
                 String pathName = DirTool.combine(R.Paths.SysFile, sysFile.getPath());
                 if (FileTool.isExist(pathName)) {
                     File file = new File(pathName);

@@ -2,14 +2,8 @@ package com.yuzhyn.bigbird.app.application.internal.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.yuzhyn.bigbird.app.aarg.R;
-import com.yuzhyn.bigbird.app.application.internal.entity.SysFile;
-import com.yuzhyn.bigbird.app.application.internal.entity.SysFileBucket;
-import com.yuzhyn.bigbird.app.application.internal.entity.SysFileCursor;
-import com.yuzhyn.bigbird.app.application.internal.entity.SysUserFileConf;
-import com.yuzhyn.bigbird.app.application.internal.mapper.SysFileBucketMapper;
-import com.yuzhyn.bigbird.app.application.internal.mapper.SysFileCursorMapper;
-import com.yuzhyn.bigbird.app.application.internal.mapper.SysFileMapper;
-import com.yuzhyn.bigbird.app.application.internal.mapper.SysUserFileConfMapper;
+import com.yuzhyn.bigbird.app.application.internal.entity.*;
+import com.yuzhyn.bigbird.app.application.internal.mapper.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import pers.yuzhyn.azylee.core.datas.collections.ListTool;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormat;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormatPattern;
+import pers.yuzhyn.azylee.core.datas.ids.UUIDTool;
 import pers.yuzhyn.azylee.core.datas.strings.StringTool;
-import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileCharCodeTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
+import reactor.util.function.Tuple2;
 import reactor.util.function.Tuple3;
 import reactor.util.function.Tuples;
 
@@ -44,6 +39,9 @@ public class SysFileService {
 
     @Autowired
     SysFileMapper sysFileMapper;
+
+    @Autowired
+    SysFileDownloadLogMapper sysFileDownloadLogMapper;
 
 
     public boolean checkSpaceLimit(String userId, long fileSize) {
@@ -188,7 +186,7 @@ public class SysFileService {
     //endregion
 
     //region 下载文件功能函数
-    public SysFile getDownloadFile(String userPrefix, String bucketName, String fileName) {
+    public Tuple2<SysFileCursor, SysFile> getDownloadFile(String userPrefix, String bucketName, String fileName) {
         if (StringTool.ok(userPrefix, bucketName, fileName)) {
             SysUserFileConf conf = sysUserFileConfMapper.selectOne(new LambdaQueryWrapper<SysUserFileConf>()
                     .eq(SysUserFileConf::getUrlPrefix, userPrefix));
@@ -207,7 +205,7 @@ public class SysFileService {
                     if (ListTool.ok(cursorList)) cursor = cursorList.get(0);
                     if (null != cursor && null != cursor.getExpiryTime() && LocalDateTime.now().isBefore(cursor.getExpiryTime())) {
                         SysFile sysFile = sysFileMapper.selectById(cursor.getFileId());
-                        return sysFile;
+                        return Tuples.of(cursor, sysFile);
                     }
                 }
             }
@@ -215,16 +213,31 @@ public class SysFileService {
         return null;
     }
 
-    public SysFile getDownloadFile(String cursorId) {
+    public Tuple2<SysFileCursor, SysFile> getDownloadFile(String cursorId) {
         if (StringTool.ok(cursorId)) {
             SysFileCursor cursor = sysFileCursorMapper.selectOne(new LambdaQueryWrapper<SysFileCursor>()
                     .eq(SysFileCursor::getId, cursorId));
             if (null != cursor && null != cursor.getExpiryTime() && LocalDateTime.now().isBefore(cursor.getExpiryTime())) {
                 SysFile sysFile = sysFileMapper.selectById(cursor.getFileId());
-                return sysFile;
+                return Tuples.of(cursor, sysFile);
             }
         }
         return null;
+    }
+
+    public void saveDownloadLog(SysFileCursor cursor, SysFile file, String ip) {
+        if (cursor != null && file != null) {
+            try {
+                SysFileDownloadLog log = new SysFileDownloadLog();
+                log.setId(UUIDTool.get());
+                log.setIp(ip);
+                log.setCreateTime(LocalDateTime.now());
+                log.setCursorId(cursor.getId());
+                log.setFileName(file.getName());
+                sysFileDownloadLogMapper.insert(log);
+            } catch (Exception ex) {
+            }
+        }
     }
     //endregion
 }

@@ -4,13 +4,14 @@ import com.yuzhyn.bigbird.app.aarg.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.core.io.ClassPathResource;
 import pers.yuzhyn.azylee.core.datas.collections.MapTool;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormat;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormatPattern;
+import pers.yuzhyn.azylee.core.datas.ids.UUIDTool;
 import pers.yuzhyn.azylee.core.datas.numbers.LongTool;
 import pers.yuzhyn.azylee.core.datas.strings.StringTool;
-import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
 import pers.yuzhyn.azylee.core.ios.dirs.DirTool;
 import pers.yuzhyn.azylee.core.ios.files.FileTool;
 import pers.yuzhyn.azylee.core.ios.files.FileVersionManager;
@@ -23,6 +24,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Slf4j
+@EnableCaching
 @SpringBootApplication
 public class BigbirdAppApplication {
 

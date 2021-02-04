@@ -2,29 +2,42 @@ package com.yuzhyn.bigbird.app.application.customization.schedule;
 
 import com.yuzhyn.bigbird.app.application.internal.entity.SysStatusLog;
 import com.yuzhyn.bigbird.app.application.internal.mapper.SysStatusLogMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.*;
 import org.springframework.stereotype.Component;
 import pers.yuzhyn.azylee.core.datas.datetimes.DateTimeFormat;
-import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
+import pers.yuzhyn.azylee.core.datas.ids.UUIDTool;
 import pers.yuzhyn.azylee.core.logs.Alog;
 import pers.yuzhyn.azylee.core.threads.sleeps.Sleep;
 
 import javax.lang.model.element.VariableElement;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
+@Slf4j
 @Component
 @EnableScheduling
-//@EnableAsync
+@EnableAsync
 public class TestSchedule {
 
     @Autowired
     SysStatusLogMapper sysStatusLogMapper;
 
-
-//    @Async
+    @Async
     @Scheduled(cron = "0/1 * * * * *")
+    public void logtest() {
+        Thread t = Thread.currentThread();
+//        for (int i = 0; i < 10; i++) {
+//            log.info("TestSchedule" + new Date() + " : Annotation：is show run :" + t.getId() + "," + t.getName());
+//            log.info(UUIDTool.getId(10));
+//            log.error("error log test");
+//        }
+    }
+
+    //    @Async
+//    @Scheduled(cron = "0/1 * * * * *")
     public void show() {
 //        Thread t = Thread.currentThread();
 //        Sleep.s(2);

@@ -7,9 +7,9 @@ server:
 spring:
   application:
     name: bigbird-app
-  #启用覆盖同名bean
+
 #  main:
-#    allow-bean-definition-overriding: true
+#    allow-bean-definition-overriding: true #启用覆盖同名bean
   # 数据库相关配置
   datasource:
     # 方式一：  引用外部文件
@@ -43,14 +43,19 @@ spring:
   mvc:
     servlet:
       load-on-startup: 1
+  cache:
+    jcache:
+      config: classpath:config/ehcache.xml
 
 # mybatis-plus 输出 SQL 语句
-#mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
 
-# 打印sql
-#logging:
+#日志记录
+logging:
+  config: classpath:config/log4j2.xml
 #  level:
+#    com.hisense.rop.portal.mapper: debug
 #    com.chz.mapper: debug
 #    com.example.demo.dao: debug

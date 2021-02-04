@@ -6,7 +6,7 @@ import com.yuzhyn.bigbird.app.common.model.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pers.yuzhyn.azylee.core.datas.collections.MapTool;
-import pers.yuzhyn.azylee.core.datas.uuids.UUIDTool;
+import pers.yuzhyn.azylee.core.datas.ids.UUIDTool;
 
 import java.time.LocalDateTime;
 import java.util.List;
